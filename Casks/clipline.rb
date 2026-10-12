@@ -1,6 +1,6 @@
 cask "clipline" do
-  version "1.0.1"
-  sha256 "10570bdb363884099a3f6ed6e2f13f015d0466159c2556ff25b37ba98aafca9d"
+  version "1.0.2"
+  sha256 "b44342ea66506795c4fb533349b30344a3f159c4b109438235bb4273ef281f0e"
 
   url "https://github.com/ffkiyo7/Clipline/releases/download/clipline-v#{version}/Clipline-#{version}.zip"
   name "Clipline"
