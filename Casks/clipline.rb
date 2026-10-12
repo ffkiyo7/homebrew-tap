@@ -13,16 +13,9 @@ cask "clipline" do
     strategy :github_latest
   end
 
-  depends_on macos: ">= :sonoma"
+  depends_on macos: :sonoma
 
   app "Clipline.app"
-
-  # Clipline is not notarized by Apple. Without this, macOS would refuse to
-  # open it the first time.
-  postflight do
-    system_command "/usr/bin/xattr",
-                   args: ["-dr", "com.apple.quarantine", "#{appdir}/Clipline.app"]
-  end
 
   uninstall quit: "io.github.ffkiyo7.Clipline"
 
@@ -30,4 +23,14 @@ cask "clipline" do
     "~/Library/Application Support/Clipline",
     "~/Library/Preferences/io.github.ffkiyo7.Clipline.plist",
   ]
+
+  caveats <<~EOS
+    Clipline is not notarized by Apple, so macOS stops it the first time.
+    Run this once, then open it as usual:
+
+      xattr -dr com.apple.quarantine /Applications/Clipline.app
+
+    Or open it, then choose Open Anyway under
+    System Settings → Privacy & Security. Later upgrades open right away.
+  EOS
 end
